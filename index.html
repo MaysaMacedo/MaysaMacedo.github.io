@@ -36,6 +36,7 @@ body {
 <body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
+
 <script>
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
@@ -50,19 +51,19 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
 // setup x 
 var xValue = function(d) { return d.duracao;}, // data -> value
-    x = d3.scale.linear().range([0, width]), // value -> display
+    x = d3.scaleLinear().range([0, width]), // value -> display
     xMap = function(d) { return x(xValue(d));}, // data -> display
-    xAxis = d3.svg.axis().scale(x).orient("bottom");
+    xAxis = d3.axisBottom(x);
 
 // setup y
 var yValue = function(d) { return d["foi"];}, // data -> value
-    y = d3.scale.linear().range([height, 0]), // value -> display
+    y = d3.scaleLinear().range([height, 0]), // value -> display
     yMap = function(d) { return y(yValue(d));}, // data -> display
-    yAxis = d3.svg.axis().scale(y).orient("left");
+    yAxis = d3.axisLeft(y);
 
 // setup fill color
 var cValue = function(d) { return d.Manufacturer;},
-    color = d3.scale.category10();
+    color = d3.scaleOrdinal(d3.schemeCategory10);
 
 // add the graph canvas to the body of the webpage
 var svg = d3.select("body").append("svg")
